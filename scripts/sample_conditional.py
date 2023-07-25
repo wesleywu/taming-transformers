@@ -3,7 +3,6 @@ import torch
 import numpy as np
 from omegaconf import OmegaConf
 import streamlit as st
-from streamlit import caching
 from PIL import Image
 from main import instantiate_from_config, DataModuleFromConfig
 from torch.utils.data import DataLoader
@@ -277,7 +276,7 @@ def get_data(config):
     return data
 
 
-@st.cache(allow_output_mutation=True, suppress_st_warning=True)
+@st.cache_resource
 def load_model_and_dset(config, ckpt, gpu, eval_mode):
     # get data
     dsets = get_data(config)   # calls data.config ...
